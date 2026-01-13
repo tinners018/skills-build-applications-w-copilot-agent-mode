@@ -14,12 +14,40 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+
+import os
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
+from rest_framework.routers import DefaultRouter
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from django.conf import settings
 from . import views
 
-router = routers.DefaultRouter()
+
+# Custom DefaultRouter to override API root view with codespace URL
+class CodespaceDefaultRouter(DefaultRouter):
+    def get_api_root_view(self, api_urls=None):
+        original_view = super().get_api_root_view(api_urls)
+        def custom_view(request, *args, **kwargs):
+            response = original_view(request, *args, **kwargs)
+            # Get codespace name from environment
+            codespace_name = os.environ.get('CODESPACE_NAME')
+            if codespace_name:
+                base_url = f"https://{codespace_name}-8000.app.github.dev/api/"
+            else:
+                # fallback to request host
+                base_url = request.build_absolute_uri('/api/')
+            # Patch the returned URLs to use the codespace URL
+            if isinstance(response.data, dict):
+                for k, v in response.data.items():
+                    if isinstance(v, str) and v.startswith('/api/'):
+                        response.data[k] = base_url + v[len('/api/'):]
+            return response
+        return custom_view
+
+router = CodespaceDefaultRouter()
 router.register(r'users', views.UserViewSet, basename='user')
 router.register(r'teams', views.TeamViewSet, basename='team')
 router.register(r'activities', views.ActivityViewSet, basename='activity')
