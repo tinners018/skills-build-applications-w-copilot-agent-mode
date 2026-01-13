@@ -1,0 +1,91 @@
+
+body {
+  background: linear-gradient(135deg, #e3f0ff 0%, #f8f9fa 100%);
+  min-height: 100vh;
+  color: #222;
+}
+
+.App {
+  text-align: center;
+}
+
+.navbar {
+  background: linear-gradient(90deg, #0d6efd 60%, #0a58ca 100%) !important;
+  box-shadow: 0 2px 8px rgba(13,110,253,0.08);
+}
+.navbar-brand, .navbar-nav .nav-link {
+  color: #fff !important;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+}
+.navbar-brand:hover, .navbar-nav .nav-link.active, .navbar-nav .nav-link:hover {
+  color: #ffe066 !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #0d6efd;
+  font-weight: 700;
+}
+
+.card {
+  border-radius: 1rem;
+  border: none;
+  background: #fff;
+  box-shadow: 0 2px 12px rgba(13,110,253,0.07);
+}
+.card-title {
+  color: #0a58ca;
+}
+
+.table {
+  background: #f8f9fa;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+.table th {
+  background: #e3f0ff !important;
+  color: #0d6efd;
+  font-weight: 600;
+}
+.table-striped > tbody > tr:nth-of-type(odd) {
+  background-color: #f0f6ff;
+}
+.table-bordered {
+  border: 1px solid #0d6efd;
+}
+
+.btn, .btn-primary {
+  background: linear-gradient(90deg, #0d6efd 60%, #0a58ca 100%);
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  transition: background 0.2s;
+}
+.btn:hover, .btn-primary:hover {
+  background: linear-gradient(90deg, #0a58ca 60%, #0d6efd 100%);
+  color: #ffe066;
+}
+
+a, .App-link {
+  color: #0d6efd;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+a:hover, .App-link:hover {
+  color: #0a58ca;
+}
+
+/* Custom modal styles (if needed) */
+.modal-content {
+  border-radius: 1rem;
+  border: 2px solid #0d6efd;
+}
+.modal-header {
+  background: #e3f0ff;
+  color: #0d6efd;
+}
+.modal-footer {
+  background: #f8f9fa;
+}
